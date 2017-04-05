@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>StoreApp</artifactId>
+        <groupId>com.arberkuci</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <packaging>ear</packaging>
+
+    <name>StoreApp-ear</name>
+    <artifactId>StoreApp-ear</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.arberkuci</groupId>
+            <artifactId>StoreApp-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+            <type>ejb</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.arberkuci</groupId>
+            <artifactId>StoreApp-web</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+            <type>war</type>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>StoreApp-ear</finalName>
+    </build>
+
+    <properties>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>
