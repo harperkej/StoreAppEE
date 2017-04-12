@@ -25,8 +25,17 @@
 
         <dependency>
             <groupId>com.arberkuci</groupId>
-            <artifactId>StoreApp-ejb-api</artifactId>
+            <artifactId>StoreApp-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <type>ejb-client</type>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
 
     </dependencies>
