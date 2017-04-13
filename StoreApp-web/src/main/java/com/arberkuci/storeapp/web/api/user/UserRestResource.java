@@ -2,8 +2,6 @@ package com.arberkuci.storeapp.web.api.user;
 
 import com.arberkuci.storeapp.ejb.user.api.UserFacade;
 import com.arberkuci.storeapp.ejb.user.dto.UserDto;
-import com.arberkuci.storeapp.web.json.JsonBuilder;
-import org.apache.log4j.Logger;
 
 import javax.inject.Inject;
 
@@ -20,11 +18,6 @@ public class UserRestResource {
     @Inject
     UserFacade userFacade;
 
-    @Inject
-    JsonBuilder jsonBuilder;
-
-    private static final Logger logger = Logger.getLogger(UserRestResource.class);
-
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -40,7 +33,6 @@ public class UserRestResource {
                             add("name", storedUser.getName()).
                             add("surName", storedUser.getSurName())).build()).build();
         } catch (Exception e) {
-            logger.error(e);
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.fillInStackTrace()).build();
         }
         return response;
