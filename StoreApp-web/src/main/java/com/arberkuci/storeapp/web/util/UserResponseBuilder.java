@@ -24,7 +24,6 @@ public class UserResponseBuilder {
                 genericEntity = new GenericEntity<List<UserDto>>(dataAsList) {
                 };
             }
-
             switch (requestType) {
                 case DELETE:
                     response = Response.status(Response.Status.OK).entity(genericEntity).build();
@@ -36,7 +35,7 @@ public class UserResponseBuilder {
                     response = Response.status(Response.Status.OK).entity(genericEntity).build();
                     break;
                 case POST:
-                    response = Response.status(Response.Status.OK).entity(genericEntity).build();
+                    response = Response.status(Response.Status.CREATED).entity(genericEntity).build();
                     break;
                 case UPDATE:
                     response = Response.status(Response.Status.OK).entity(genericEntity).build();
@@ -73,8 +72,7 @@ public class UserResponseBuilder {
     }
 
     private boolean isList(Object data) {
-        boolean res = data instanceof List<?>;
-        return res;
+        return data instanceof List<?>;
     }
 
 }
