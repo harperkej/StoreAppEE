@@ -9,10 +9,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-/**
- * Created by a.kuci on 4/6/2017.
- */
+
 @Stateless
 @Local(UserControl.class)
 public class UserControlBean implements UserControl {
@@ -21,8 +20,14 @@ public class UserControlBean implements UserControl {
     @Inject
     UserDao userDao;
 
+    private final String className = this.getClass().getName();
+
+    private final Logger logger = Logger.getLogger(className);
+
     @Override
     public UserDto storeUser(UserDto userDto) {
+        final String MN = "storeUser";
+        logger.exiting(className, MN);
         if (userDto != null) {
             UserEntity userEntity = new UserEntity();
             userEntity.setName(userDto.getName());
@@ -30,12 +35,16 @@ public class UserControlBean implements UserControl {
             userDao.persistUser(userEntity);
             userDto.setId(userEntity.getId());
         }
+
+        logger.exiting(className, MN);
         return userDto;
     }
 
 
     @Override
     public UserDto findUserById(Long id) {
+        final String MN = "findUserById";
+        logger.entering(className, MN);
         UserEntity foundUser = userDao.findUserById(id);
         UserDto res = null;
         if (foundUser != null) {
@@ -44,17 +53,21 @@ public class UserControlBean implements UserControl {
             res.setName(foundUser.getName());
             res.setSurName(foundUser.getSurName());
         }
+        logger.exiting(className, MN);
         return res;
     }
 
 
     @Override
     public List<UserDto> findAllUsers() {
+        final String MN = "findAllUsers";
+        logger.exiting(className, MN);
         List<UserDto> result = new ArrayList<>();
         List<UserEntity> foundUsers = userDao.getAllUsers();
         if (foundUsers != null && !foundUsers.isEmpty()) {
             foundUsers.stream().filter(e -> validateUserEntity(e)).map(UserControlBean::mapUser).forEach(result::add);
         }
+        logger.exiting(className, MN);
         return result;
     }
 

@@ -40,4 +40,11 @@ public class UserDto {
     public void setSurName(String surName) {
         this.surName = surName;
     }
+
+    public String toString() {
+        return new StringBuilder().append("{ id = ").append(this.getId()).append(", ")
+                .append("name = ").append(this.getSurName()).append(", ").append("surname = ").
+                        append(this.getSurName()).append(" }").toString();
+    }
+
 }

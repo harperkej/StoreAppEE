@@ -5,9 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * Created by a.kuci on 4/6/2017.
- */
+
 @Entity
 public class UserEntity {
 
@@ -18,7 +16,6 @@ public class UserEntity {
     private String name;
 
     private String surName;
-
 
     public UserEntity() {
 
@@ -53,4 +50,11 @@ public class UserEntity {
     public void setSurName(String surName) {
         this.surName = surName;
     }
+
+    public String toString() {
+        return new StringBuilder().append("{ id = ").append(this.getId()).append(", ")
+                .append("name = ").append(this.getSurName()).append(", ").append("surname = ").
+                        append(this.getSurName()).append(" }").toString();
+    }
+
 }

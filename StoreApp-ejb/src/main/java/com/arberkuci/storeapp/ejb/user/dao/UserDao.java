@@ -4,9 +4,7 @@ import com.arberkuci.storeapp.ejb.user.entity.UserEntity;
 
 import java.util.List;
 
-/**
- * Created by a.kuci on 4/9/2017.
- */
+
 public interface UserDao {
 
     public UserEntity persistUser(UserEntity userEntity);

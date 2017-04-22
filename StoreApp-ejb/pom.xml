@@ -36,6 +36,10 @@
                 <configuration>
                     <ejbVersion>3.2</ejbVersion>
                     <generateClient>true</generateClient>
+                    <clientIncludes>
+                        <clientInclude>com/arberkuci/storeapp/ejb/user/api/**</clientInclude>
+                        <clientInclude>com/arberkuci/storeapp/ejb/user/dto/**</clientInclude>
+                    </clientIncludes>
                 </configuration>
             </plugin>
 
