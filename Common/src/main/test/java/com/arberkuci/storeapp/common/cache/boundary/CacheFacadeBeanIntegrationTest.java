@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 
 @RunWith(Arquillian.class)
-public class CacheFacadeBeanUnitTest extends Assert {
+public class CacheFacadeBeanIntegrationTest extends Assert {
 
     @Inject
     CacheLocal cacheLocal;
