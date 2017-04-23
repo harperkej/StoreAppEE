@@ -9,7 +9,7 @@
 
     <module>
 
-        <java>Common.jar</java>
+        <ejb>Common.jar</ejb>
 
     </module>
 
