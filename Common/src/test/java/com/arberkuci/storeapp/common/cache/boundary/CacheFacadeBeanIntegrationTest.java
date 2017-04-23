@@ -11,18 +11,25 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
+import java.util.logging.Logger;
 
 @RunWith(Arquillian.class)
 public class CacheFacadeBeanIntegrationTest extends Assert {
 
     @Inject
     CacheLocal cacheLocal;
+
+    @Rule
+    public TestName methodName = new TestName();
+
+    private static final String className = CacheFacadeBeanIntegrationTest.class.getName();
+
+    private static Logger logger = Logger.getLogger(className);
 
     @Deployment
     public static JavaArchive createJar() {
@@ -31,11 +38,26 @@ public class CacheFacadeBeanIntegrationTest extends Assert {
                 addClass(CacheFacadeBean.class);
     }
 
+    @BeforeClass
+    public static void initBeforeClass() {
+        logger.fine("Starting test -> " + className);
+    }
+
+    @AfterClass
+    public static void shutDown() {
+        logger.fine("Test class -> " + className + " finished");
+    }
+
     @Before
     public void init() {
+        logger.entering(className, methodName.getMethodName());
         cacheLocal.clearAllCaches();
     }
 
+    @After
+    public void afterTest() {
+        logger.exiting(className, methodName.getMethodName());
+    }
 
     @Test
     public void test_Store_SimpleData() {
