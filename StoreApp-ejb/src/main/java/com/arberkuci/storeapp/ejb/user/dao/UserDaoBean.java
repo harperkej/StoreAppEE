@@ -25,34 +25,25 @@ public class UserDaoBean implements UserDao {
 
     @Override
     public UserEntity persistUser(UserEntity userEntity) {
-        final String MN = "persistUser";
-        logger.entering(className, MN);
         entityManager.persist(userEntity);
         logger.fine("The following entity is stored in db -> " + userEntity);
-        logger.exiting(className, MN);
         return userEntity;
     }
 
 
     @Override
     public UserEntity findUserById(Long id) {
-        final String MN = "findUserById";
-        logger.entering(className, MN);
         UserEntity foundUser = entityManager.find(UserEntity.class, id);
-        logger.fine("Id -> " + id + " the use associated with id is -> " + foundUser);
-        logger.exiting(className, MN);
+        logger.fine("With the given id -> " + id + " the following user if found-> " + foundUser);
         return foundUser;
     }
 
 
     @Override
     public List<UserEntity> getAllUsers() {
-        final String MN = "getAllUsers";
-        logger.entering(className, MN);
         Query query = entityManager.createQuery("SELECT u from UserEntity u");
         List<UserEntity> result = query.getResultList();
         logger.fine("The following data are fetched from data base -> " + result);
-        logger.exiting(className, MN);
         return result;
     }
 }

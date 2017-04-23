@@ -10,6 +10,7 @@
         <module>StoreApp-web</module>
         <module>StoreApp-ejb</module>
         <module>StoreApp-ear</module>
+        <module>Common</module>
     </modules>
 
     <build>

@@ -1,5 +1,6 @@
 package com.arberkuci.storeapp.web.api.user;
 
+import com.arberkuci.storeapp.common.logging.facade.LoggingInterceptor;
 import com.arberkuci.storeapp.ejb.user.api.UserFacade;
 import com.arberkuci.storeapp.ejb.user.dto.UserDto;
 import com.arberkuci.storeapp.web.util.Request;
@@ -7,6 +8,7 @@ import com.arberkuci.storeapp.web.util.UserResponseBuilder;
 
 import javax.inject.Inject;
 
+import javax.interceptor.Interceptors;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Path(value = "users")
+@Interceptors({LoggingInterceptor.class})
 public class UserRestResource {
 
     @Inject
@@ -22,7 +25,7 @@ public class UserRestResource {
     @Inject
     UserResponseBuilder userResponseBuilder;
 
-    private static final String className = UserRestResource.class.getName();
+    private final String className = this.getClass().getName();
 
     private Logger logger = Logger.getLogger(className);
 
@@ -30,8 +33,6 @@ public class UserRestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response storeUser(UserDto userDto) {
-        final String MN = "storeUser";
-        logger.entering(className, MN);
         Response response;
         try {
             UserDto storedUser = userFacade.storeUser(userDto);
@@ -41,7 +42,6 @@ public class UserRestResource {
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getStackTrace()).build();
         }
         logger.fine("Final response -> " + response);
-        logger.exiting(className, MN);
         return response;
     }
 
@@ -50,8 +50,6 @@ public class UserRestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response findUserById(@PathParam("id") Long id) {
-        final String MN = "findUserById";
-        logger.entering(className, MN);
         Response response;
         try {
             UserDto foundUser = userFacade.findByUserById(id);
@@ -61,7 +59,6 @@ public class UserRestResource {
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
         logger.fine("Final response -> " + response);
-        logger.exiting(className, MN);
         return response;
     }
 
@@ -69,8 +66,6 @@ public class UserRestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
-        final String MN = "getAllUsers";
-        logger.entering(className, MN);
         Response response;
         try {
             List<UserDto> foundUsers = userFacade.findAllUsers();
@@ -80,7 +75,6 @@ public class UserRestResource {
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
         logger.fine("Final response -> " + response);
-        logger.exiting(className, MN);
         return response;
     }
 
