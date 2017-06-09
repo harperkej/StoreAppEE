@@ -13,4 +13,9 @@ public interface UserControl {
 
     public List<UserDto> findAllUsers();
 
+    public UserDto updateUser(UserDto userDto);
+
+    public UserDto getUserByUserName(String userName);
+
+
 }

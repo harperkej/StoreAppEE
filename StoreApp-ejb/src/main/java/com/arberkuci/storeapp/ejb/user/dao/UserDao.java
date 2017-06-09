@@ -13,4 +13,9 @@ public interface UserDao {
 
     public List<UserEntity> getAllUsers();
 
+    public UserEntity updateUser(UserEntity userDto);
+
+    public List<UserEntity> getUserByUserName(String userName);
+
+
 }

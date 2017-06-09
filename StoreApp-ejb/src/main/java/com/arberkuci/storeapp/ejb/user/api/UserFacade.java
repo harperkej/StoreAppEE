@@ -11,8 +11,12 @@ public interface UserFacade {
 
     public UserDto findByUserById(Long id);
 
-
     public List<UserDto> findAllUsers();
+
+    public UserDto updateUser(UserDto userDto);
+
+    public UserDto getUserByUserName(String userName);
+
 
 
 }

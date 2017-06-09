@@ -46,4 +46,19 @@ public class UserDaoBean implements UserDao {
         logger.fine("The following data are fetched from data base -> " + result);
         return result;
     }
+
+    @Override
+    public UserEntity updateUser(UserEntity userEntity) {
+        logger.fine("The user with the following id " + userEntity.getId() + " is updated");
+        return entityManager.merge(userEntity);
+    }
+
+    @Override
+    public List<UserEntity> getUserByUserName(String userName) {
+        Query query = entityManager.createQuery("SELECT u FROM UserEntity u WHERE u.userName = ?1");
+        query.setParameter(1,userName);
+        List<UserEntity> foundUsers = query.getResultList();
+        logger.fine("The following users are found " + foundUsers + " when search by userName " + userName);
+        return foundUsers;
+    }
 }

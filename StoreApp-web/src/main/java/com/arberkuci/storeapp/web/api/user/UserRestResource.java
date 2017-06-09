@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Path(value = "users")
+@Path(value = "customers")
 @Interceptors({LoggingInterceptor.class})
 public class UserRestResource {
 
@@ -59,6 +59,38 @@ public class UserRestResource {
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
         logger.fine("Final response -> " + response);
+        return response;
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUser(UserDto userDto) {
+        Response response;
+        try {
+            UserDto updatedUser = this.userFacade.updateUser(userDto);
+            response = this.userResponseBuilder.buildResponseWithListOfResources(updatedUser, Request.UPDATE);
+        } catch (Exception e) {
+            logger.severe("An error occurred while trying to update the user with id " + userDto.getId() + ". The message => " + e.getMessage());
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+        logger.fine("Final response => " + response);
+        return response;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("username/{username}")
+    public Response findUserByUsername(@PathParam("username") String userName) {
+        Response response;
+        try {
+            UserDto userDto = this.userFacade.getUserByUserName(userName);
+            response = this.userResponseBuilder.buildResponseWithListOfResources(userDto, Request.GET);
+        } catch (Exception e) {
+            logger.severe("An error occurred while trying to find user by user name -> " + userName);
+            response = Response.status(Response.Status.NOT_FOUND).encoding(e.getMessage()).build();
+        }
+        logger.fine("Final response => " + response);
         return response;
     }
 

@@ -8,9 +8,7 @@
     <initialize-in-order>true</initialize-in-order>
 
     <module>
-
         <ejb>Common.jar</ejb>
-
     </module>
 
     <module>

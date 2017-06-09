@@ -4,17 +4,23 @@ public class UserDto {
 
     private Long id;
 
-    private String name;
+    private String firstName;
 
-    private String surName;
+    private String lastName;
+
+    private String userName;
+
+    private Double points;
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String name, String surName) {
+    public UserDto(Long id, String firstName, String surName, String userName, Double points) {
         this.id = id;
-        this.name = name;
-        this.surName = surName;
+        this.firstName = firstName;
+        this.lastName = surName;
+        this.userName = userName;
+        this.points = points;
     }
 
     public Long getId() {
@@ -25,26 +31,43 @@ public class UserDto {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Double getPoints() {
+        return points;
+    }
+
+    public void setPoints(Double points) {
+        this.points = points;
     }
 
     public String toString() {
         return new StringBuilder().append("{ id = ").append(this.getId()).append(", ")
-                .append("name = ").append(this.getSurName()).append(", ").append("surname = ").
-                        append(this.getSurName()).append(" }").toString();
+                .append("firstName = ").append(this.getLastName()).append(", ").append("lastName = ").
+                        append(this.getLastName()).append("userName = ").append(this.getUserName()).append("points = ").
+                        append(this.getPoints()).append(" }").toString();
     }
 
 }

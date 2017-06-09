@@ -30,4 +30,14 @@ public class UserFacadeBean implements UserFacade {
     public List<UserDto> findAllUsers() {
         return this.userControl.findAllUsers();
     }
+
+    @Override
+    public UserDto updateUser(UserDto userDto) {
+        return this.userControl.updateUser(userDto);
+    }
+
+    @Override
+    public UserDto getUserByUserName(String userName) {
+        return this.userControl.getUserByUserName(userName);
+    }
 }

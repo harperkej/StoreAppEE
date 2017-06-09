@@ -28,8 +28,11 @@ public class UserControlBean implements UserControl {
     public UserDto storeUser(UserDto userDto) {
         if (userDto != null) {
             UserEntity userEntity = new UserEntity();
-            userEntity.setName(userDto.getName());
-            userEntity.setSurName(userDto.getSurName());
+            userEntity.setFirstName(userDto.getFirstName());
+            userEntity.setLastName(userDto.getLastName());
+            userEntity.setUserName(userDto.getUserName());
+            //When the user is stored for the first time, the number of points is 0!
+            userEntity.setPoints(new Double(0));
             userDao.persistUser(userEntity);
             userDto.setId(userEntity.getId());
         }
@@ -44,8 +47,10 @@ public class UserControlBean implements UserControl {
         if (foundUser != null) {
             res = new UserDto();
             res.setId(foundUser.getId());
-            res.setName(foundUser.getName());
-            res.setSurName(foundUser.getSurName());
+            res.setFirstName(foundUser.getFirstName());
+            res.setLastName(foundUser.getLastName());
+            res.setUserName(foundUser.getUserName());
+            res.setPoints(foundUser.getPoints());
         }
         return res;
     }
@@ -61,16 +66,62 @@ public class UserControlBean implements UserControl {
         return result;
     }
 
+    @Override
+    public UserDto updateUser(UserDto userDto) {
+        UserDto updatedUser = null;
+        if (userDto == null) {
+            //TODO: Throw an exception here!
+        } else {
+            boolean userDoesNotExists = this.findUserById(userDto.getId()) == null;
+            if (userDoesNotExists) {
+                //TODO: Throw an exception here!
+            } else {
+                //writing this line of code was fun :D
+                updatedUser = mapUser(this.userDao.updateUser(mapUser(userDto)));
+            }
+        }
+        return updatedUser;
+    }
+
+    @Override
+    public UserDto getUserByUserName(String userName) {
+        UserDto foundUser = null;
+        List<UserEntity> listOfUsers = this.userDao.getUserByUserName(userName);
+
+        boolean noUserFound = listOfUsers == null || listOfUsers.isEmpty();
+        boolean moreThanOneUserWIthTheSameUsername = !noUserFound && listOfUsers.size() > 1;
+
+        if (noUserFound || moreThanOneUserWIthTheSameUsername) {
+            //TODO: Throw an exception here!
+        } else {
+            foundUser = mapUser(listOfUsers.get(0));
+        }
+        return foundUser;
+    }
+
     private static boolean validateUserEntity(UserEntity userEntity) {
-        return userEntity != null && userEntity.getId() != null && userEntity.getName() != null && userEntity.getSurName() != null;
+        return userEntity != null && userEntity.getId() != null && userEntity.getFirstName() != null && userEntity.getLastName() != null
+                && userEntity.getUserName() != null && userEntity.getPoints() != null;
     }
 
     private static UserDto mapUser(UserEntity userEntity) {
         UserDto userDto = new UserDto();
         userDto.setId(userEntity.getId());
-        userDto.setName(userEntity.getName());
-        userDto.setSurName(userEntity.getSurName());
+        userDto.setFirstName(userEntity.getFirstName());
+        userDto.setLastName(userEntity.getLastName());
+        userDto.setUserName(userEntity.getUserName());
+        userDto.setPoints(userEntity.getPoints());
         return userDto;
+    }
+
+    private static UserEntity mapUser(UserDto userDto) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(userDto.getId());
+        userEntity.setFirstName(userDto.getFirstName());
+        userEntity.setLastName(userDto.getLastName());
+        userEntity.setUserName(userDto.getUserName());
+        userEntity.setPoints(userDto.getPoints());
+        return userEntity;
     }
 
 }
