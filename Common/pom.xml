@@ -75,7 +75,7 @@
                     <generateClient>true</generateClient>
                     <clientIncludes>
                         <clientInclude>com/arberkuci/storeapp/common/logging/**</clientInclude>
-                        <clientInclude>com/arberkuci/storeapp/common/cache/api</clientInclude>
+                        <clientInclude>com/arberkuci/storeapp/common/cache/api/**</clientInclude>
                     </clientIncludes>
                 </configuration>
             </plugin>

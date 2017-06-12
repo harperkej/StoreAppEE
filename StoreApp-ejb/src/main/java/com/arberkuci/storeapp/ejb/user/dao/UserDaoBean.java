@@ -25,9 +25,10 @@ public class UserDaoBean implements UserDao {
 
     @Override
     public UserEntity persistUser(UserEntity userEntity) {
-        entityManager.persist(userEntity);
-        logger.fine("The following entity is stored in db -> " + userEntity);
-        return userEntity;
+        UserEntity storedEntity = entityManager.merge(userEntity);
+        logger.warning("The following entity is stored in db -> " + storedEntity);
+        entityManager.flush();
+        return storedEntity;
     }
 
 
@@ -56,7 +57,7 @@ public class UserDaoBean implements UserDao {
     @Override
     public List<UserEntity> getUserByUserName(String userName) {
         Query query = entityManager.createQuery("SELECT u FROM UserEntity u WHERE u.userName = ?1");
-        query.setParameter(1,userName);
+        query.setParameter(1, userName);
         List<UserEntity> foundUsers = query.getResultList();
         logger.fine("The following users are found " + foundUsers + " when search by userName " + userName);
         return foundUsers;

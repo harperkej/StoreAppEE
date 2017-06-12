@@ -5,9 +5,10 @@
              version="2.1">
 
     <persistence-unit name="store-unit-name" transaction-type="JTA">
-        <jta-data-source>java:comp/DefaultDataSource</jta-data-source>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/__default</jta-data-source>
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
         </properties>
     </persistence-unit>
 </persistence>

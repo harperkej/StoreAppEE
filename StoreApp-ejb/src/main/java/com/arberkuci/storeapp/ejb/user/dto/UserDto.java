@@ -12,15 +12,19 @@ public class UserDto {
 
     private Double points;
 
+    //TODO Temporary field -> it has to do nothing with business logic!
+    private boolean isFromCache;
+
     public UserDto() {
     }
 
-    public UserDto(Long id, String firstName, String surName, String userName, Double points) {
+    public UserDto(Long id, String firstName, String surName, String userName, Double points, boolean isFromCache) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = surName;
         this.userName = userName;
         this.points = points;
+        this.isFromCache = isFromCache;
     }
 
     public Long getId() {
@@ -63,11 +67,19 @@ public class UserDto {
         this.points = points;
     }
 
+    public boolean isFromCache() {
+        return isFromCache;
+    }
+
+    public void setFromCache(boolean fromCache) {
+        this.isFromCache = fromCache;
+    }
+
     public String toString() {
-        return new StringBuilder().append("{ id = ").append(this.getId()).append(", ")
-                .append("firstName = ").append(this.getLastName()).append(", ").append("lastName = ").
-                        append(this.getLastName()).append("userName = ").append(this.getUserName()).append("points = ").
-                        append(this.getPoints()).append(" }").toString();
+        return new StringBuilder().append("{ id = ").append(this.getId()).append(", ").append("firstName = ").
+                append(this.getLastName()).append(", ").append("lastName = ").
+                append(this.getLastName()).append("userName = ").append(this.getUserName()).append("points = ").
+                append(this.getPoints()).append(", isFromCache = ").append(this.isFromCache()).append(" }").toString();
     }
 
 }

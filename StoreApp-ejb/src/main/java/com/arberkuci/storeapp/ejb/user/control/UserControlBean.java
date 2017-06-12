@@ -1,5 +1,6 @@
 package com.arberkuci.storeapp.ejb.user.control;
 
+import com.arberkuci.storeapp.ejb.cache.control.UserCache;
 import com.arberkuci.storeapp.ejb.user.dao.UserDao;
 import com.arberkuci.storeapp.ejb.user.dto.UserDto;
 import com.arberkuci.storeapp.ejb.user.entity.UserEntity;
@@ -16,9 +17,11 @@ import java.util.logging.Logger;
 @Local(UserControl.class)
 public class UserControlBean implements UserControl {
 
-
     @Inject
     UserDao userDao;
+
+    @Inject
+    UserCache userCache;
 
     private final String className = this.getClass().getName();
 
@@ -33,8 +36,10 @@ public class UserControlBean implements UserControl {
             userEntity.setUserName(userDto.getUserName());
             //When the user is stored for the first time, the number of points is 0!
             userEntity.setPoints(new Double(0));
-            userDao.persistUser(userEntity);
+            userEntity = this.userDao.persistUser(userEntity);
             userDto.setId(userEntity.getId());
+            //Store the user in cache as well!
+            this.userCache.storeUser(userDto);
         }
         return userDto;
     }
@@ -42,15 +47,23 @@ public class UserControlBean implements UserControl {
 
     @Override
     public UserDto findUserById(Long id) {
-        UserEntity foundUser = userDao.findUserById(id);
-        UserDto res = null;
-        if (foundUser != null) {
-            res = new UserDto();
-            res.setId(foundUser.getId());
-            res.setFirstName(foundUser.getFirstName());
-            res.setLastName(foundUser.getLastName());
-            res.setUserName(foundUser.getUserName());
-            res.setPoints(foundUser.getPoints());
+        //first search in cache.
+        UserDto res = this.userCache.findUserById(id);
+        if (res == null) {
+            //try to search in db
+            UserEntity foundUser = userDao.findUserById(id);
+            if (foundUser != null) {
+                res = new UserDto();
+                res.setId(foundUser.getId());
+                res.setFirstName(foundUser.getFirstName());
+                res.setLastName(foundUser.getLastName());
+                res.setUserName(foundUser.getUserName());
+                res.setPoints(foundUser.getPoints());
+                this.userCache.storeUser(res);
+                res.setFromCache(false);
+            }
+        } else {
+            res.setFromCache(true);
         }
         return res;
     }
@@ -78,6 +91,8 @@ public class UserControlBean implements UserControl {
             } else {
                 //writing this line of code was fun :D
                 updatedUser = mapUser(this.userDao.updateUser(mapUser(userDto)));
+                //store in cache as well.
+                this.userCache.storeUser(updatedUser);
             }
         }
         return updatedUser;
@@ -85,16 +100,20 @@ public class UserControlBean implements UserControl {
 
     @Override
     public UserDto getUserByUserName(String userName) {
-        UserDto foundUser = null;
-        List<UserEntity> listOfUsers = this.userDao.getUserByUserName(userName);
+        UserDto foundUser = this.userCache.findUserByUsername(userName);
+        if (foundUser == null) {
+            List<UserEntity> listOfUsers = this.userDao.getUserByUserName(userName);
 
-        boolean noUserFound = listOfUsers == null || listOfUsers.isEmpty();
-        boolean moreThanOneUserWIthTheSameUsername = !noUserFound && listOfUsers.size() > 1;
+            boolean noUserFound = listOfUsers == null || listOfUsers.isEmpty();
+            boolean moreThanOneUserWIthTheSameUsername = !noUserFound && listOfUsers.size() > 1;
 
-        if (noUserFound || moreThanOneUserWIthTheSameUsername) {
-            //TODO: Throw an exception here!
+            if (noUserFound || moreThanOneUserWIthTheSameUsername) {
+                //TODO: Throw an exception here!
+            } else {
+                foundUser = mapUser(listOfUsers.get(0));
+            }
         } else {
-            foundUser = mapUser(listOfUsers.get(0));
+            foundUser.setFromCache(true);
         }
         return foundUser;
     }

@@ -35,7 +35,7 @@
             <groupId>com.arberkuci</groupId>
             <artifactId>Common</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <type>ejb</type>
         </dependency>
 
     </dependencies>
@@ -55,17 +55,16 @@
 
                         <ejbModule>
                             <groupId>com.arberkuci</groupId>
+                            <artifactId>Common</artifactId>
+                        </ejbModule>
+                        <ejbModule>
+                            <groupId>com.arberkuci</groupId>
                             <artifactId>StoreApp-ejb</artifactId>
                         </ejbModule>
                         <webModule>
                             <groupId>com.arberkuci</groupId>
                             <artifactId>StoreApp-web</artifactId>
                         </webModule>
-
-                        <jarModule>
-                            <groupId>com.arberkuci</groupId>
-                            <artifactId>Common</artifactId>
-                        </jarModule>
 
                     </modules>
                 </configuration>
