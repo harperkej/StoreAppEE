@@ -4,7 +4,6 @@ package com.arberkuci.storeapp.common.logging.facade;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 
@@ -20,18 +19,18 @@ public class LoggingInterceptor {
 
         Logger logger = Logger.getLogger(className);
 
-        final long timeBeforeInvoke;
-        final long timeAfterInvoke;
-        final long duration;
+        final long timeBeforeMethodInvocation;
+        final long timeAfterMethodInvocation;
+        final long millis;
         logger.entering(className, methodName);
-        timeBeforeInvoke = System.currentTimeMillis();
+        timeBeforeMethodInvocation = System.currentTimeMillis();
 
         try {
             return invocationContext.proceed();
         } finally {
-            timeAfterInvoke = System.currentTimeMillis();
-            duration = timeAfterInvoke - timeBeforeInvoke;
-            logger.fine("Method took -> " + duration + " millis to be executed!");
+            timeAfterMethodInvocation = System.currentTimeMillis();
+            millis = timeAfterMethodInvocation - timeBeforeMethodInvocation;
+            logger.fine("Method took -> " + millis + " millis to be executed!");
             logger.exiting(className, methodName);
         }
     }

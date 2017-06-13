@@ -17,6 +17,4 @@ public interface UserFacade {
 
     public UserDto getUserByUserName(String userName);
 
-
-
 }

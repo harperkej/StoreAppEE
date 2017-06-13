@@ -51,6 +51,7 @@ public class CacheFacadeBeanIntegrationTest extends Assert {
     @Before
     public void init() {
         logger.entering(className, methodName.getMethodName());
+        //clear the cache before each test -> the tests should be independent of each other!
         cacheLocal.clearAllCaches();
     }
 
@@ -121,8 +122,10 @@ public class CacheFacadeBeanIntegrationTest extends Assert {
             cachName += Integer.valueOf(i);
         }
 
+        //clear all caches!
         cacheLocal.clearAllCaches();
-        assertTrue(cacheLocal.isAnyCacheAvailable() == false);
+        //verify that all caches are cleared!
+        assertFalse(cacheLocal.isAnyCacheAvailable());
     }
 
 }

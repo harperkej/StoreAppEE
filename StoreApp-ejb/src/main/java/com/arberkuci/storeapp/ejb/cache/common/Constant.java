@@ -7,8 +7,8 @@ public class Constant {
 
     public static final String CACHE_USER = "CACHE_USER";
 
-    public static final String CACHE_USER_BY_USERNAME = "CACHE_USER_BY_USERNAME";
+    public static final String CACHE_USER_BY_USERNAME = CACHE_USER + "/CACHE_USER_BY_USERNAME";
 
-    public static final String CACHE_USER_BY_ID = "CACHE_USER_BY_ID";
+    public static final String CACHE_USER_BY_ID = CACHE_USER + "/CACHE_USER_BY_ID";
 
 }

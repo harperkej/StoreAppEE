@@ -47,11 +47,14 @@ public class CacheFacadeBean implements CacheLocal {
         Set<Object> keys = this.allCaches.keySet();
 
         keys.forEach(e -> {
+
             ConcurrentMap<Object, Object> cache = this.allCaches.get(e);
             Set<Object> keysOfCache = cache.keySet();
+
             keysOfCache.forEach(k -> {
                 cache.remove(k);
             });
+            
             this.allCaches.remove(e);
         });
 

@@ -23,10 +23,6 @@ public class UserControlBean implements UserControl {
     @Inject
     UserCache userCache;
 
-    private final String className = this.getClass().getName();
-
-    private final Logger logger = Logger.getLogger(className);
-
     @Override
     public UserDto storeUser(UserDto userDto) {
         if (userDto != null) {
@@ -69,6 +65,8 @@ public class UserControlBean implements UserControl {
     }
 
 
+    //TODO: This is something that needs to be analyzed -> do we need to get the data
+    // from cache or only from db or how?
     @Override
     public List<UserDto> findAllUsers() {
         List<UserDto> result = new ArrayList<>();
@@ -111,6 +109,7 @@ public class UserControlBean implements UserControl {
                 //TODO: Throw an exception here!
             } else {
                 foundUser = mapUser(listOfUsers.get(0));
+                foundUser.setFromCache(false);
             }
         } else {
             foundUser.setFromCache(true);

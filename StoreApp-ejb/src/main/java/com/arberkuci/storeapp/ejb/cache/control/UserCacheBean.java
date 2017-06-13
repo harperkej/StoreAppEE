@@ -24,13 +24,13 @@ public class UserCacheBean implements UserCache {
         if (userDto != null) {
             if (userDto.getId() != null) {
                 cacheLocal.getCache(Constant.CACHE_USER_BY_ID).put(userDto.getId(), userDto);
-                logger.warning("The following entry is cached associated with id -> " + userDto.getId());
+                logger.info("The following entry " + userDto + " is cached associated with id -> " + userDto.getId());
             } else {
-                logger.warning("The id is null, nothing stored in cache.");
+                logger.info("The id is null, nothing stored in cache.");
             }
             if (userDto.getUserName() != null) {
                 cacheLocal.getCache(Constant.CACHE_USER_BY_USERNAME).put(userDto.getUserName(), userDto);
-                logger.warning("THe following entry is cached associated with username -> " + userDto.getUserName());
+                logger.info("THe following entry ->" + userDto + " is cached associated with username -> " + userDto.getUserName());
             } else {
                 logger.warning("The username is null, nothing stored in cache.");
             }
@@ -42,14 +42,14 @@ public class UserCacheBean implements UserCache {
     @Override
     public UserDto findUserById(Long id) {
         UserDto foundUser = (UserDto) this.cacheLocal.getCache(Constant.CACHE_USER_BY_ID).get(id);
-        logger.warning("With the given id " + id + " the following result is found in cache " + foundUser);
+        logger.info("With the given id " + id + " the following result is found in cache " + foundUser);
         return foundUser;
     }
 
     @Override
     public UserDto findUserByUsername(String username) {
         UserDto foundUser = (UserDto) this.cacheLocal.getCache(Constant.CACHE_USER_BY_USERNAME).get(username);
-        logger.warning("With the given username " + username + " the following result is found in cache " + foundUser);
+        logger.info("With the given username " + username + " the following result is found in cache " + foundUser);
         return foundUser;
     }
 
