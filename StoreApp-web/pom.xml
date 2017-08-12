@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>StoreApp-web</artifactId>
+    <artifactId>store-app-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -41,7 +41,7 @@
     </dependencies>
 
     <build>
-        <finalName>StoreApp-web</finalName>
+        <finalName>store-app-web</finalName>
     </build>
 
     <properties>
