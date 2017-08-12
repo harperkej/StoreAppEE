@@ -76,6 +76,7 @@
                     <clientIncludes>
                         <clientInclude>com/arberkuci/storeapp/common/logging/**</clientInclude>
                         <clientInclude>com/arberkuci/storeapp/common/cache/api/**</clientInclude>
+                        <clientInclude>com/arberkuci/storeapp/common/lifecycle/**</clientInclude>
                     </clientIncludes>
                 </configuration>
             </plugin>

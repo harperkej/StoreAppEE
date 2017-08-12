@@ -7,6 +7,7 @@ import com.arberkuci.storeapp.ejb.user.dto.UserDto;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.sql.Timestamp;
 import java.util.logging.Logger;
 
 @Stateless
@@ -22,6 +23,7 @@ public class UserCacheBean implements UserCache {
 
     public void storeUser(UserDto userDto) {
         if (userDto != null) {
+            userDto.setTimestamp(new Timestamp(System.currentTimeMillis()));
             if (userDto.getId() != null) {
                 cacheLocal.getCache(Constant.CACHE_USER_BY_ID).put(userDto.getId(), userDto);
                 logger.info("The following entry " + userDto + " is cached associated with id -> " + userDto.getId());
@@ -42,6 +44,9 @@ public class UserCacheBean implements UserCache {
     @Override
     public UserDto findUserById(Long id) {
         UserDto foundUser = (UserDto) this.cacheLocal.getCache(Constant.CACHE_USER_BY_ID).get(id);
+        if(foundUser != null){
+            foundUser.setTimestamp(new Timestamp(System.currentTimeMillis()));
+        }
         logger.info("With the given id " + id + " the following result is found in cache " + foundUser);
         return foundUser;
     }
@@ -49,6 +54,9 @@ public class UserCacheBean implements UserCache {
     @Override
     public UserDto findUserByUsername(String username) {
         UserDto foundUser = (UserDto) this.cacheLocal.getCache(Constant.CACHE_USER_BY_USERNAME).get(username);
+        if(foundUser != null){
+            foundUser.setTimestamp(new Timestamp(System.currentTimeMillis()));
+        }
         logger.info("With the given username " + username + " the following result is found in cache " + foundUser);
         return foundUser;
     }
