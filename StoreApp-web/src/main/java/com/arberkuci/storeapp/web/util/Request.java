@@ -8,7 +8,6 @@ public enum Request {
     POST,
     DELETE,
     UPDATE,
-    GET,
-    OK
+    GET
 
 }

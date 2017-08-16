@@ -23,12 +23,12 @@
             <scope>provided</scope>
         </dependency>
 
-
         <dependency>
             <groupId>com.arberkuci</groupId>
             <artifactId>StoreApp-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>ejb-client</type>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -36,6 +36,7 @@
             <artifactId>Common</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>ejb-client</type>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

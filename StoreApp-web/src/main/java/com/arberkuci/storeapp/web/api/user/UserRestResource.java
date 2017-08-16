@@ -47,7 +47,6 @@ public class UserRestResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response findUserById(@PathParam("id") Long id) {
         Response response;
@@ -96,7 +95,6 @@ public class UserRestResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
         Response response;
         try {

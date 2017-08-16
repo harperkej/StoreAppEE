@@ -31,9 +31,6 @@ public class UserResponseBuilder {
                 case GET:
                     response = Response.status(Response.Status.FOUND).entity(genericEntity).build();
                     break;
-                case OK:
-                    response = Response.status(Response.Status.OK).entity(genericEntity).build();
-                    break;
                 case POST:
                     response = Response.status(Response.Status.CREATED).entity(genericEntity).build();
                     break;
@@ -48,7 +45,6 @@ public class UserResponseBuilder {
             switch (requestType) {
                 case DELETE:
                 case GET:
-                case OK:
                 case POST:
                 case UPDATE:
                     response = Response.status(Response.Status.NOT_FOUND).build();
