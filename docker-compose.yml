@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    container_name: shop-ee-mysql-db
+    image: harperkej/shop-ee-mysql-db
+  app:
+    container_name: shop-ee-payara-full
+    image: harperkej/shop-ee-payara-full
+    depends_on: 
+     - db
+    environment:
+     - DATABASE_IP=db
