@@ -1,6 +1,6 @@
 FROM harperkej/java8
 
-LABEL maintainer="arber.kuci2@gmail.com"
+LABEL maintainer="Arber Kuci, arber.kuci2@gmail.com"
 
 RUN chmod a+x /opt
 
@@ -17,6 +17,8 @@ RUN unzip /opt/${PAYARA_FILE_NAME} -d /opt && \
     rm /opt/${PAYARA_FILE_NAME}
 RUN mkdir ${PAYARA_DIR}/deployments
 
+#Download mysql java connector and putting it to proper application server directory.
+
 ENV MYSQL_CONNECTOR_DOWNLOAD_URL https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.43.zip
 ENV MYSQL_CONNECTOR_VERSION 5.1.43
 ENV MYSQL_CONNECTOR_FILE_NAME mysql-connector-java-${MYSQL_CONNECTOR_VERSION}
@@ -27,6 +29,8 @@ RUN unzip /opt/${MYSQL_CONNECTOR_FILE_NAME}.zip -d /opt && \
     rm -r /opt/${MYSQL_CONNECTOR_FILE_NAME}
 
 WORKDIR ${PAYARA_DIR}/bin/
+
+#Admin aser should have a different password from the defualt(empty) one so that remote administration is enables...
 
 ADD New_Password.txt .
 ADD Old_Password.txt .
