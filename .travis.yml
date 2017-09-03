@@ -10,6 +10,6 @@ cache:
  directories:
   - $HOME/.m2
 script:
- build_and_re_deploy.sh
+ -bash build_and_re_deploy.sh
  
  
