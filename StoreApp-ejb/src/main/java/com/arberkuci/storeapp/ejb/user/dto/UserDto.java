@@ -16,20 +16,16 @@ public class UserDto {
 
     private Timestamp timestamp;
 
-    //TODO Temporary field -> it has to do nothing with business logic!
-    private boolean isFromCache;
-
     public UserDto() {
     }
 
-    public UserDto(Long id, String firstName, String surName, String userName, Double points, Timestamp timestamp, boolean isFromCache) {
+    public UserDto(Long id, String firstName, String surName, String userName, Double points, Timestamp timestamp) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = surName;
         this.userName = userName;
         this.points = points;
         this.timestamp = timestamp;
-        this.isFromCache = isFromCache;
     }
 
     public Long getId() {
@@ -72,19 +68,11 @@ public class UserDto {
         this.points = points;
     }
 
-    public boolean isFromCache() {
-        return isFromCache;
-    }
-
-    public void setFromCache(boolean fromCache) {
-        this.isFromCache = fromCache;
-    }
-
     public String toString() {
         return new StringBuilder().append("{ id = ").append(this.getId()).append(", ").append("firstName = ").
                 append(this.getLastName()).append(", ").append("lastName = ").
                 append(this.getLastName()).append("userName = ").append(this.getUserName()).append("points = ").
-                append(this.getPoints()).append(", timestamp = ").append(getTimestamp().toString()).append(", isFromCache = ").append(this.isFromCache()).append(" }").toString();
+                append(this.getPoints()).append(", timestamp = ").append(getTimestamp().toString()).append(" }").toString();
     }
 
     public Timestamp getTimestamp() {

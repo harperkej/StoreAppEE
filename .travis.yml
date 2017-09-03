@@ -1,7 +1,9 @@
 language:
  java
 sudo:
- false
+ required
+services:
+ - docker
 jdk:
  oraclejdk8
 cache:

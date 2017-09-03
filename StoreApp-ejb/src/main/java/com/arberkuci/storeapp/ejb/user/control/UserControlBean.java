@@ -56,10 +56,7 @@ public class UserControlBean implements UserControl {
                 res.setUserName(foundUser.getUserName());
                 res.setPoints(foundUser.getPoints());
                 this.userCache.storeUser(res);
-                res.setFromCache(false);
             }
-        } else {
-            res.setFromCache(true);
         }
         return res;
     }
@@ -109,10 +106,7 @@ public class UserControlBean implements UserControl {
                 //TODO: Throw an exception here!
             } else {
                 foundUser = mapUser(listOfUsers.get(0));
-                foundUser.setFromCache(false);
             }
-        } else {
-            foundUser.setFromCache(true);
         }
         return foundUser;
     }
