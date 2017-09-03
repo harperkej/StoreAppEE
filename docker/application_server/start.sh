@@ -14,7 +14,7 @@ asadmin start-domain domain1 && \
 	asadmin --user $ADMIN_USER --passwordfile=New_Password.txt deploy StoreApp-ear.ear	
 
 
-while true
-do
-	sleep 10000000
-done
+#while true
+#do
+#	sleep 10000000
+#done
