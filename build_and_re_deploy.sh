@@ -16,11 +16,13 @@ mvn clean install
 cp StoreApp-ear/target/StoreApp-ear.ear docker/application_server/
 
 echo '<<<<<< - Building database images - >>>>>>'
-cd /home/harperkej/Desktop/Projects/StoreAppEE/StoreAppEE/docker/db/
+cd docker/db/
 sudo docker build -t harperkej/shop-ee-mysql-db .
 
+cd ..
+cd application_server/
+
 echo '<<<<<< - Building the application image - >>>>>>'
-cd /home/harperkej/Desktop/Projects/StoreAppEE/StoreAppEE/docker/application_server/
 sudo docker build -t harperkej/shop-ee-payara-full .
 
 echo '<<<<<< - Starting containers. - >>>>>>'
