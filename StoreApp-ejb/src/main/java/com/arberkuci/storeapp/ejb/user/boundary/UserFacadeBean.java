@@ -2,7 +2,7 @@ package com.arberkuci.storeapp.ejb.user.boundary;
 
 import com.arberkuci.storeapp.ejb.user.api.UserFacade;
 import com.arberkuci.storeapp.ejb.user.control.UserControl;
-import com.arberkuci.storeapp.ejb.user.dto.UserDto;
+import com.arberkuci.storeapp.common.rest.response.UserDto;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;

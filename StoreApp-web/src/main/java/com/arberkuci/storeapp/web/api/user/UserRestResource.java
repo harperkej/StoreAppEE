@@ -2,9 +2,9 @@ package com.arberkuci.storeapp.web.api.user;
 
 import com.arberkuci.storeapp.common.logging.facade.LoggingInterceptor;
 import com.arberkuci.storeapp.ejb.user.api.UserFacade;
-import com.arberkuci.storeapp.ejb.user.dto.UserDto;
+import com.arberkuci.storeapp.common.rest.response.UserDto;
 import com.arberkuci.storeapp.web.util.Request;
-import com.arberkuci.storeapp.web.util.UserResponseBuilder;
+import com.arberkuci.storeapp.web.util.ResponseBuilder;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ public class UserRestResource {
     UserFacade userFacade;
 
     @Inject
-    UserResponseBuilder userResponseBuilder;
+    ResponseBuilder responseBuilder;
 
     private final String className = this.getClass().getName();
 
@@ -36,7 +36,7 @@ public class UserRestResource {
         Response response;
         try {
             UserDto storedUser = userFacade.storeUser(userDto);
-            response = userResponseBuilder.buildResponseWithListOfResources(storedUser, Request.POST);
+            response = responseBuilder.buildResponseWithListOfResources(storedUser, Request.POST);
         } catch (Exception e) {
             logger.severe("An error occured while storing the user. The exception is -> " + e.getMessage());
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getStackTrace()).build();
@@ -52,7 +52,7 @@ public class UserRestResource {
         Response response;
         try {
             UserDto foundUser = userFacade.findByUserById(id);
-            response = this.userResponseBuilder.buildResponseWithListOfResources(foundUser, Request.GET);
+            response = this.responseBuilder.buildResponseWithListOfResources(foundUser, Request.GET);
         } catch (Exception e) {
             logger.severe("An error occured while searching the user with id " + id + ". The message is -> " + e.getMessage());
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
@@ -68,7 +68,7 @@ public class UserRestResource {
         Response response;
         try {
             UserDto updatedUser = this.userFacade.updateUser(userDto);
-            response = this.userResponseBuilder.buildResponseWithListOfResources(updatedUser, Request.UPDATE);
+            response = this.responseBuilder.buildResponseWithListOfResources(updatedUser, Request.UPDATE);
         } catch (Exception e) {
             logger.severe("An error occurred while trying to update the user with id " + userDto.getId() + ". The message => " + e.getMessage());
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
@@ -84,7 +84,7 @@ public class UserRestResource {
         Response response;
         try {
             UserDto userDto = this.userFacade.getUserByUserName(userName);
-            response = this.userResponseBuilder.buildResponseWithListOfResources(userDto, Request.GET);
+            response = this.responseBuilder.buildResponseWithListOfResources(userDto, Request.GET);
         } catch (Exception e) {
             logger.severe("An error occurred while trying to find user by user name -> " + userName);
             response = Response.status(Response.Status.NOT_FOUND).encoding(e.getMessage()).build();
@@ -99,7 +99,7 @@ public class UserRestResource {
         Response response;
         try {
             List<UserDto> foundUsers = userFacade.findAllUsers();
-            response = this.userResponseBuilder.buildResponseWithListOfResources(foundUsers, Request.GET);
+            response = this.responseBuilder.buildResponseWithListOfResources(foundUsers, Request.GET);
         } catch (Exception e) {
             logger.fine("An error occurred while fetching all the users. The message -> " + e.getMessage());
             response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

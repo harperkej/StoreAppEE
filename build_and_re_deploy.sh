@@ -23,3 +23,6 @@ sudo docker-compose up -d
 
 rm docker/application_server/StoreApp-ear.ear
 
+echo 'The docker host: '
+docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "shop-ee-payara-full"
+

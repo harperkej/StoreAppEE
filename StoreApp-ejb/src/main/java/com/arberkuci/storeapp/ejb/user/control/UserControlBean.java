@@ -2,7 +2,7 @@ package com.arberkuci.storeapp.ejb.user.control;
 
 import com.arberkuci.storeapp.ejb.cache.control.UserCache;
 import com.arberkuci.storeapp.ejb.user.dao.UserDao;
-import com.arberkuci.storeapp.ejb.user.dto.UserDto;
+import com.arberkuci.storeapp.common.rest.response.UserDto;
 import com.arberkuci.storeapp.ejb.user.entity.UserEntity;
 
 import javax.ejb.Local;
@@ -10,7 +10,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @Stateless

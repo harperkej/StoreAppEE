@@ -2,7 +2,7 @@ package com.arberkuci.storeapp.ejb.cache.control;
 
 import com.arberkuci.storeapp.common.cache.api.CacheLocal;
 import com.arberkuci.storeapp.ejb.cache.common.Constant;
-import com.arberkuci.storeapp.ejb.user.dto.UserDto;
+import com.arberkuci.storeapp.common.rest.response.UserDto;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;

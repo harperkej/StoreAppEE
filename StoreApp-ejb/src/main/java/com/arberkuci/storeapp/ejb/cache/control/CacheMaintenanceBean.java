@@ -2,13 +2,12 @@ package com.arberkuci.storeapp.ejb.cache.control;
 
 import com.arberkuci.storeapp.common.cache.api.CacheLocal;
 import com.arberkuci.storeapp.ejb.cache.common.Constant;
-import com.arberkuci.storeapp.ejb.user.dto.UserDto;
+import com.arberkuci.storeapp.common.rest.response.UserDto;
 
 import javax.annotation.Resource;
 import javax.ejb.*;
 import javax.inject.Inject;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 

@@ -1,28 +1,40 @@
 package com.arberkuci.storeapp.web.util;
 
 
-import com.arberkuci.storeapp.ejb.user.dto.UserDto;
+import com.arberkuci.storeapp.common.rest.response.RestResponse;
+import com.arberkuci.storeapp.common.rest.response.UserDto;
 
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserResponseBuilder {
+public class ResponseBuilder {
 
-
-    public Response buildResponseWithListOfResources(Object data, Request requestType) {
+    public Response buildResponseWithListOfResources(Object data, Request requestType) throws Exception{
         Response response;
-        GenericEntity<List<UserDto>> genericEntity;
+
+        GenericEntity<?  extends List<? extends RestResponse>> genericEntity;
         if (createResponseWithSuccessStatus(data)) {
 
             if (isList(data)) {
-                genericEntity = new GenericEntity<List<UserDto>>((List<UserDto>) data) {
-                };
+                if(((List<?>)data).get(0) instanceof UserDto){
+                    genericEntity = new GenericEntity<List<UserDto>>((List<UserDto>) data) {
+                    };
+                }else{
+                    //Here a custom exception should be thrown
+                    throw new Exception("WTF is going on?");
+                }
             } else {
-                List<UserDto> dataAsList = Arrays.asList((UserDto) data);
-                genericEntity = new GenericEntity<List<UserDto>>(dataAsList) {
-                };
+                if(data instanceof UserDto){
+                    List<UserDto> dataAsList = Arrays.asList((UserDto) data);
+                    genericEntity = new GenericEntity<List<UserDto>>(dataAsList) {
+                    };
+                }else{
+                    //Here also a custom exception should be thrown.
+                    throw new Exception("WTF is goinf on?");
+                }
             }
             switch (requestType) {
                 case DELETE:
@@ -66,7 +78,6 @@ public class UserResponseBuilder {
         }
         return result;
     }
-
     private boolean isList(Object data) {
         return data instanceof List<?>;
     }

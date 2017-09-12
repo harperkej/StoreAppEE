@@ -1,6 +1,6 @@
 package com.arberkuci.storeapp.ejb.user.control;
 
-import com.arberkuci.storeapp.ejb.user.dto.UserDto;
+import com.arberkuci.storeapp.common.rest.response.UserDto;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package com.arberkuci.storeapp.ejb.user.dto;
+package com.arberkuci.storeapp.common.rest.response;
 
 import java.sql.Timestamp;
 
-public class UserDto {
+public class UserDto extends RestResponse{
 
     private Long id;
 
