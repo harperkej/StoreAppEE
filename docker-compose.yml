@@ -1,11 +1,11 @@
 version: '2'
 services:
   db:
-    build: ./docker/application_server
+    build: ./docker/db
     image: shop-ee-mysql-db
     container_name: shop-ee-mysql-db
   app:
-    build: ./docker/db
+    build: ./docker/application_server
     image: shop-ee-payara-full
     container_name: shop-ee-payara-full
     depends_on:
@@ -14,3 +14,4 @@ services:
      - db:DATABASE_IP
     ports:
      - "8080"
+     - "4848"

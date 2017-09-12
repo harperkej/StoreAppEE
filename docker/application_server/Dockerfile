@@ -7,8 +7,6 @@ RUN chmod a+x /opt
 ENV ADMIN_USER admin
 ENV ADMIN_PASSWORD admin
 
-ENV DATABASE_IP 172.17.0.2
-
 ENV PAYARA_DOWNLOAD_URL https://s3-eu-west-1.amazonaws.com/payara.co/Payara+Downloads/Payara+4.1.1.161/payara-4.1.1.161.zip
 ENV PAYARA_VERSION 161
 ENV PAYARA_FILE_NAME payara-full-${PAYARA_VERSION}.zip
@@ -49,3 +47,4 @@ RUN chmod a+x start.sh
 ENTRYPOINT start.sh
 
 EXPOSE 4848 8080 8009 8181
+

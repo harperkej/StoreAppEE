@@ -21,3 +21,5 @@ sudo docker-compose build
 echo '<<<<<< - Starting containers. - >>>>>>'
 sudo docker-compose up -d
 
+rm docker/application_server/StoreApp-ear.ear
+
