@@ -1,13 +1,15 @@
 language:
  java
 sudo:
- false
+ required
+services:
+ - docker
 jdk:
  oraclejdk8
 cache:
  directories:
   - $HOME/.m2
 script:
- mvn clean install
+ - bash build_and_re_deploy.sh
  
  

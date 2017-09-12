@@ -6,9 +6,9 @@
 
     <persistence-unit name="store-unit-name" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>jdbc/__default</jta-data-source>
+        <jta-data-source>jdbc/shop_ee_datasource</jta-data-source>
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="none" />
+            <property name="javax.persistence.schema-generation.database.action" value="create" />
         </properties>
     </persistence-unit>
 </persistence>
