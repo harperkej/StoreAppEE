@@ -10,8 +10,8 @@ sudo docker rm shop-ee-payara-full
 
 set -e
 
-echo '<<<<<< - Building the application and running the tests - >>>>>>'
-mvn clean install
+echo '<<<<<< - Building the application>>>>>>'
+mvn clean install -Dskiptests=true
 
 cp StoreApp-ear/target/StoreApp-ear.ear docker/application_server/
 
