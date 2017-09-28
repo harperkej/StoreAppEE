@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 #Start domain1 first
 asadmin start-domain domain1 && \
 	asadmin create-jdbc-connection-pool \

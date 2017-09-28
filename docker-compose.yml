@@ -14,4 +14,4 @@ services:
      - db:DATABASE_IP
     ports:
      - "8282:8080"
-     - "4848:4848"
+     - "80:4848"
