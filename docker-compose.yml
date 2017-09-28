@@ -13,5 +13,5 @@ services:
     links:
      - db:DATABASE_IP
     ports:
-     - "8080"
-     - "4848"
+     - "8080:8080"
+     - "4848:4848"
