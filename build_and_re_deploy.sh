@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo '<<<<<< - Stoping the containers -- if any is up and running - >>>>>>'
-sudo docker stop shop-ee-mysql-db
-sudo docker stop shop-ee-payara-full
+docker stop shop-ee-mysql-db
+docker stop shop-ee-payara-full
 
 echo '<<<<<< - Removing containers -- if any of them exists - >>>>>>'
-sudo docker rm shop-ee-mysql-db
-sudo docker rm shop-ee-payara-full
+docker rm shop-ee-mysql-db
+docker rm shop-ee-payara-full
 
 set -e
 
@@ -16,10 +16,10 @@ mvn clean install
 cp StoreApp-ear/target/StoreApp-ear.ear docker/application_server/
 
 echo '<<<<<< - Building docker images. - >>>>>'
-sudo docker-compose build
+docker-compose build
 
 echo '<<<<<< - Starting containers. - >>>>>>'
-sudo docker-compose up -d
+docker-compose up -d
 
 rm docker/application_server/StoreApp-ear.ear
 
